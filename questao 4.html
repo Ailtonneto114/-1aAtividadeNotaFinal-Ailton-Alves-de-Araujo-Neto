@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background-color: #58ACFA;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+        }
+    </style>
+
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+
+    <form>
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" required><br><br>
+
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" step="0.01" required><br><br>
+
+        <button type="button" onclick="calcularIMC()">Calcular IMC</button>
+
+    </form>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularIMC() {
+            let peso = document.getElementById('peso').value;
+            let altura = document.getElementById('altura').value;
+            let classificacao;
+            
+            if (!peso || !altura || peso <= 0 || altura <= 0) {
+                alert("Por favor, insira valores válidos para peso e altura.");
+                return;
+            }
+
+            let imc = parseFloat(peso / (altura * altura));
+
+            if (imc < 18.5) {
+                classificacao = 'Abaixo do peso';
+            } else if (imc < 24.9) {
+                classificacao = 'Peso normal';
+            } else if (imc < 29.9) {
+                classificacao = 'Sobrepeso';
+            } else {
+                classificacao = 'Obesidade';
+            }
+
+            document.getElementById('resultado').innerText = 'Seu IMC é ' + imc.toFixed(2) + ' (' + classificacao + ')';
+        }
+    </script>
+</body>
+</html>
